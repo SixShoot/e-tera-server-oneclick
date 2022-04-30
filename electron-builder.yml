@@ -1,0 +1,14 @@
+appId: lightlocal.com.lightlocal
+copyright: Tsukasaroot
+files:
+  ["!public/lib/source${/*}","!config.json", "!lib/source${/*}", "!webserver", "!deployer.sh", "!builder.sh"]
+nsis:
+  createStartMenuShortcut: true
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+publish:
+  provider: github
+protocols:
+  name: linking-test
+  schemes:
+    [electron-test]

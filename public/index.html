@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LightLocal</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/notifications.css">
+    <link rel="stylesheet" href="./css/menu.css">
+</head>
+
+<body class="bg-dark text-light">
+    <h1 class="text-center">LightLocal</h1>
+
+    <div id="_preferences" class="position-absolute top-1 end-0">
+        <p>Settings <i class="fa-solid fa-gear fa-2x" onclick="settings()"></i></p>
+    </div>
+
+    <ul class="nav nav-tabs bg-dark">
+
+        <li class="nav-item">
+            <button class="nav-link active" onclick="openTab('home', this)">Accueil</button>
+        </li>
+    </ul>
+
+    <div id="home" style="display: none" class="tabs">
+
+        <div class="d-flex justify-content-center mt-5">
+            <div>
+                <button id="add_website" onclick="add_vhost()" class="btn btn-secondary">Ajouter un site</button>
+            </div>
+            <div>
+                <button id="start_server" onclick="start_server(this)" class="btn btn-primary">Start Webserver</button>
+                <button id="stop_server" onclick="stop_server(this)" class="btn btn-danger" disabled>Stop Webserver</button>
+            </div>
+        </div>
+        <div id="vhost-list" class="d-flex justify-content-center mt-5">
+
+        </div>
+    </div>
+
+    <div id="vhosts-list" class="d-flex justify-content-center mt-5">
+    </div>
+
+    <!--
+    Footer starts here
+    -->
+
+    <footer class="bg-dark text-white btn-outline-light form-white text-center fixed-bottom">
+
+        <div id="notification" class="hidden bg-dark text-light">
+            <p id="message"></p>
+            <button id="close-button" onClick="closeNotification(this)">
+                Close
+            </button>
+            <button id="restart-button" onClick="restartApp()" class="hidden">
+                Restart
+            </button>
+        </div>
+
+        <div id="error" class="hidden bg-dark text-light">
+            <p id="error-message"></p>
+            <button onClick="closeNotification(this)">
+                Close
+            </button>
+        </div>
+
+        <p id="version">LightLocal :</p>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            ©2022 Copyright:
+            <a href="https://www.github.com/Tsukasaroot" target="_blank" rel="noopener noreferrer">Jordan ROUCO MIGUEZ</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"
+            integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Here we have template of modal -->
+    <div id="modal" class="modal rounded-4" tabindex="0" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 id="modal-title" class="modal-title bg-dark text-light"></h5>
+                </div>
+                <div class="modal-body bg-dark text-light">
+                    <div id="modal-content">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        const {ipcRenderer} = require('electron');
+        window.jQuery = require('jquery');
+        const $ = jQuery;
+        ipcRenderer.send('ispackaged');
+
+        ipcRenderer.on('ispackaged', (event, args) => {
+            if (args) {
+                let all = document.createElement('script');
+                all.setAttribute('src', 'lib/all.min.js');
+
+                document.head.appendChild(all);
+            } else {
+                let fetch = document.createElement('script');
+                fetch.setAttribute('src', 'lib/source/fetch.js');
+
+                let menu = document.createElement('script');
+                menu.setAttribute('src', 'lib/source/menu.js');
+
+                let init = document.createElement('script');
+                init.setAttribute('src', 'lib/source/init.js');
+
+                let server_actions = document.createElement('script');
+                server_actions.setAttribute('src', 'lib/source/server_actions.js');
+
+                let settings = document.createElement('script');
+                settings.setAttribute('src', 'lib/source/preferences.js');
+
+                document.head.appendChild(settings);
+                document.head.appendChild(fetch);
+                document.head.appendChild(menu);
+                document.head.appendChild(server_actions);
+                document.head.appendChild(init);
+            }
+        });
+    </script>
+
+    <script>
+        let self_update = document.createElement('script');
+        self_update.setAttribute('src', './lib/self-update.js');
+
+        document.head.appendChild(self_update);
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,15 @@
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: cyan;
+}
+
+.card {
+    height: 500px !important;
+    width: 400px !important;;
+    max-width: 400px !important;;
+    max-height: 500px !important;;
+    overflow-y: auto;
+}
