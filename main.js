@@ -6,6 +6,13 @@ const {WebServer} = require('./lib/webserver');
 const {AppConfig} = require('./lib/config');
 const {Networking} = require('./lib/networking');
 const {Install} = require('./lib/install');
+const {Datacenter} = require('./lib/Datacenter');
+
+const DC = new Datacenter('TW');
+DC.decrypt('B5AE92062ACC7452EB6FBB44EC2D612D', '11E5B808F6922217F6FFB977321A0960');
+DC.read();
+DC.getFiles();
+DC.writeFiles();
 
 const config = new AppConfig();
 config.getConfig();

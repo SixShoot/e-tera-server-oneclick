@@ -141,3 +141,6 @@ tmp/apache.zip
 tmp/mariadb.zip
 tmp/php.zip
 release-builds
+.idea/tera-server-oneclick.iml
+Datacenter/DataCenter_Final_TW.dat
+Datacenter
