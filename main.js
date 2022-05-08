@@ -8,7 +8,7 @@ const {Networking} = require('./lib/networking');
 const {Install} = require('./lib/install');
 const {Datacenter} = require('./lib/Datacenter');
 
-const DC = new Datacenter('EUR', 'BA08C84E3C557C205A86A6497C564904', '07B0920656502F51DB8E562B328E852B');
+const DC = new Datacenter('EUR', null,'BA08C84E3C557C205A86A6497C564904', '07B0920656502F51DB8E562B328E852B');
 /*DC.decrypt();
 DC.read();
 DC.getFiles();
