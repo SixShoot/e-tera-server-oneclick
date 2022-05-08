@@ -8,11 +8,13 @@ const {Networking} = require('./lib/networking');
 const {Install} = require('./lib/install');
 const {Datacenter} = require('./lib/Datacenter');
 
-const DC = new Datacenter('TW');
-DC.decrypt('B5AE92062ACC7452EB6FBB44EC2D612D', '11E5B808F6922217F6FFB977321A0960');
+const DC = new Datacenter('EUR');
+/*DC.decrypt('BA08C84E3C557C205A86A6497C564904', '07B0920656502F51DB8E562B328E852B');
 DC.read();
 DC.getFiles();
-DC.writeFiles();
+DC.writeFiles();*/
+
+DC.repack();
 
 const config = new AppConfig();
 config.getConfig();
@@ -49,7 +51,7 @@ async function loadMainWindow() {
     const ses = mainWindow.webContents.session;
     await ses.clearCache();
 
-    mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'), {
+    /*mainWindow.loadFile(path.join(__dirname, 'public', 'index.html'), {
         query: {
             "token": config.data.token
         }
@@ -57,7 +59,7 @@ async function loadMainWindow() {
 
     mainWindow.webContents.on('did-finish-load', () => {
         mainWindow.maximize();
-    });
+    });*/
 
     /*mainWindow.once('ready-to-show', () => {
         autoUpdater.checkForUpdatesAndNotify();
